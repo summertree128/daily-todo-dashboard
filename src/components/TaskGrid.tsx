@@ -15,7 +15,7 @@ const getGridSize = () => {
   } else if (window.innerWidth < 768) { // タブレット
     return { columns: 4, rows: 5 };
   } else { // デスクトップ
-    return { columns: 5, rows: 6 };
+    return { columns: 6, rows: 6 };
   }
 };
 
