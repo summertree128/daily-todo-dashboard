@@ -166,7 +166,6 @@ const TaskGridContent: React.FC<{
             key={task.id}
             task={task}
             onToggle={onTaskToggle}
-            onMove={onTaskMove}
           />
         ))}
       </div>

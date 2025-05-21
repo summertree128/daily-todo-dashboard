@@ -4,10 +4,9 @@ import type { Task as TaskType } from '../types/Task';
 interface TaskProps {
   task: TaskType;
   onToggle: (id: string) => void;
-  onMove: (x: number, y: number, id: string) => void;
 }
 
-export const Task: React.FC<TaskProps> = ({ task, onToggle, onMove }) => {
+export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'TASK',
     item: { id: task.id, type: 'TASK' },
