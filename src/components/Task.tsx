@@ -21,29 +21,9 @@ export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
     opacity: isDragging ? 0.5 : 1,
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    const startX = touch.clientX;
-    const startY = touch.clientY;
-    const startTime = Date.now();
-
-    const handleTouchEnd = (e: React.TouchEvent) => {
-      const touch = e.changedTouches[0];
-      const endX = touch.clientX;
-      const endY = touch.clientY;
-      const endTime = Date.now();
-
-      const deltaX = Math.abs(endX - startX);
-      const deltaY = Math.abs(endY - startY);
-      const deltaTime = endTime - startTime;
-
-      if (deltaX < 10 && deltaY < 10 && deltaTime < 300) {
-        onToggle(task.id);
-      }
-    };
-
-    const element = e.currentTarget;
-    element.addEventListener('touchend', handleTouchEnd as any, { once: true });
+  const handleTouch = (e: React.TouchEvent) => {
+    e.preventDefault(); // デフォルトのタッチ動作を防止
+    onToggle(task.id);
   };
 
   return (
@@ -51,7 +31,7 @@ export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
       ref={drag as any}
       className={`task-button ${task.completed ? 'completed' : ''}`}
       style={gridStyle}
-      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouch}
       onClick={() => onToggle(task.id)}
     >
       {task.completed && (
