@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="#4A90E2"/>
+  
+  <!-- Checkmark -->
+  <path d="M384 192L224 352L128 256" stroke="white" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Plus -->
+  <path d="M256 128V384M128 256H384" stroke="white" stroke-width="48" stroke-linecap="round"/>
+</svg> 
