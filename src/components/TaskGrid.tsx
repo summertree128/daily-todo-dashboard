@@ -120,7 +120,8 @@ const TaskGridContent: React.FC<{
   onTaskMove: (x: number, y: number, taskId: string) => void;
   onTaskDelete: (taskId: string) => void;
   onNewTask: () => void;
-}> = ({ tasks, gridSize, onTaskToggle, onTaskMove, onTaskDelete, onNewTask }) => {
+  showNewTaskForm: boolean;
+}> = ({ tasks, gridSize, onTaskToggle, onTaskMove, onTaskDelete, onNewTask, showNewTaskForm }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   // ドラッグ状態を監視
@@ -181,6 +182,10 @@ const TaskGridContent: React.FC<{
           bottom: '140px',
           left: '50%',
           transform: 'translateX(-50%)',
+          zIndex: showNewTaskForm ? 0 : 999,
+          opacity: showNewTaskForm ? 0 : 1,
+          transition: 'opacity 0.3s ease',
+          pointerEvents: showNewTaskForm ? 'none' : 'auto'
         }}
       >
         +
@@ -324,6 +329,7 @@ export const TaskGrid: React.FC = () => {
         onTaskMove={handleTaskMove}
         onTaskDelete={handleTaskDelete}
         onNewTask={() => setShowNewTaskForm(true)}
+        showNewTaskForm={showNewTaskForm}
       />
 
       {showNewTaskForm && (
