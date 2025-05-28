@@ -179,10 +179,10 @@ const TaskGridContent: React.FC<{
         aria-label="Add new task"
         style={{
           position: 'fixed',
-          bottom: '140px',
+          bottom: '25px',
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: showNewTaskForm ? 0 : 999,
+          zIndex: showNewTaskForm ? 0 : 1001,
           opacity: showNewTaskForm ? 0 : 1,
           transition: 'opacity 0.3s ease',
           pointerEvents: showNewTaskForm ? 'none' : 'auto'
