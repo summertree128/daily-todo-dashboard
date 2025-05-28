@@ -11,13 +11,7 @@ const LAST_RESET_KEY = 'last-reset-time';
 
 // 画面サイズに応じてグリッドサイズを調整
 const getGridSize = () => {
-  if (window.innerWidth < 480) { // スマートフォン
-    return { columns: 3, rows: 4 };
-  } else if (window.innerWidth < 768) { // タブレット
-    return { columns: 4, rows: 5 };
-  } else { // デスクトップ
-    return { columns: 6, rows: 6 };
-  }
+  return { columns: 6, rows: 6 };
 };
 
 interface DragItem {
