@@ -428,7 +428,7 @@ button:focus-visible {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: 80px;
   background-color: rgba(255, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -478,5 +478,49 @@ button:focus-visible {
   .delete-drop-zone span {
     font-size: 1.4rem;
     padding: 12px 24px;
+  }
+}
+
+/* スマートフォン向けのスタイル */
+@media (max-width: 767px) {
+  .new-task-button {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    bottom: 20px;
+    padding-bottom: 2px;
+  }
+
+  .delete-drop-zone {
+    height: 60px;
+  }
+}
+
+/* タブレット向けのスタイル */
+@media (min-width: 768px) {
+  .new-task-button {
+    width: 56px;
+    height: 56px;
+    font-size: 32px;
+    bottom: 24px;
+    padding-bottom: 3px;
+  }
+
+  .delete-drop-zone {
+    height: 100px;
+  }
+}
+
+/* デスクトップ向けのスタイル */
+@media (min-width: 1024px) {
+  .new-task-button {
+    width: 64px;
+    height: 64px;
+    font-size: 36px;
+    bottom: 32px;
+  }
+
+  .delete-drop-zone {
+    height: 100px;
   }
 }
