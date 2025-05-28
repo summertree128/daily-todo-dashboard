@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DndProvider, useDrop, useDragLayer } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import type { Task } from '../types/Task';
 import { Task as TaskComponent } from './Task';
 import { NewTaskForm } from './NewTaskForm';
@@ -320,8 +321,10 @@ export const TaskGrid: React.FC = () => {
     setShowNewTaskForm(false);
   };
 
+  const isMobile = window.innerWidth < 768;
+
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={isMobile ? TouchBackend : HTML5Backend} options={isMobile ? { enableMouseEvents: true } : undefined}>
       <TaskGridContent
         tasks={tasks}
         gridSize={gridSize}
