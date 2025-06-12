@@ -25,12 +25,9 @@ export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
     const touch = e.touches[0];
     e.currentTarget.setAttribute('data-touch-start-x', touch.clientX.toString());
     e.currentTarget.setAttribute('data-touch-start-y', touch.clientY.toString());
-    e.preventDefault();
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
-    
     if (!isDragging) {
       const touch = e.changedTouches[0];
       const startX = Number(e.currentTarget.getAttribute('data-touch-start-x'));
