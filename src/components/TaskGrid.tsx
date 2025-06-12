@@ -252,8 +252,8 @@ export const TaskGrid: React.FC = () => {
     // Initial check
     checkAndResetTasks();
 
-    // 1 minute check
-    const intervalId = setInterval(checkAndResetTasks, 60000);
+    // Check every 5 minutes
+    const intervalId = setInterval(checkAndResetTasks, 5 * 60 * 1000);
 
     return () => clearInterval(intervalId);
   }, [lastResetTime]);
