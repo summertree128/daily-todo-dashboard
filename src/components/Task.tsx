@@ -9,7 +9,7 @@ interface TaskProps {
 export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'TASK',
-    item: { id: task.id, type: 'TASK' },
+    item: () => ({ id: task.id, type: 'TASK' }),
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -22,13 +22,30 @@ export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    e.currentTarget.setAttribute('data-touch-start-x', touch.clientX.toString());
+    e.currentTarget.setAttribute('data-touch-start-y', touch.clientY.toString());
     e.preventDefault();
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     e.preventDefault();
+    
     if (!isDragging) {
-      onToggle(task.id);
+      const touch = e.changedTouches[0];
+      const startX = Number(e.currentTarget.getAttribute('data-touch-start-x'));
+      const startY = Number(e.currentTarget.getAttribute('data-touch-start-y'));
+      
+      if (startX && startY) {
+        const deltaX = Math.abs(touch.clientX - startX);
+        const deltaY = Math.abs(touch.clientY - startY);
+        
+        if (deltaX < 20 && deltaY < 20) {
+          onToggle(task.id);
+        }
+      } else {
+        onToggle(task.id);
+      }
     }
   };
 

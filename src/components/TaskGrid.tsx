@@ -324,7 +324,16 @@ export const TaskGrid: React.FC = () => {
   };
 
   return (
-    <DndProvider backend={isMobile ? TouchBackend : HTML5Backend} options={isMobile ? { enableMouseEvents: true } : undefined}>
+    <DndProvider 
+      backend={isMobile ? TouchBackend : HTML5Backend} 
+      options={isMobile ? { 
+        enableMouseEvents: true,
+        delayTouchStart: 0,
+        delay: 0,
+        enableTouchEvents: true,
+        enableKeyboardEvents: true
+      } : undefined}
+    >
       <TaskGridContent
         tasks={tasks}
         gridSize={gridSize}
