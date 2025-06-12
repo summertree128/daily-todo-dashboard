@@ -1,0 +1,8 @@
+{
+  "language": "en",
+  "commentStyle": "english",
+  "ai": {
+    "defaultLanguage": "en",
+    "commentLanguage": "en"
+  }
+} 
