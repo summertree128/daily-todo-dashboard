@@ -21,9 +21,15 @@ export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
     opacity: isDragging ? 0.5 : 1,
   };
 
-  const handleTouch = (e: React.TouchEvent) => {
-    e.preventDefault(); // デフォルトのタッチ動作を防止
-    onToggle(task.id);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (!isDragging) {
+      onToggle(task.id);
+    }
   };
 
   return (
@@ -31,8 +37,8 @@ export const Task: React.FC<TaskProps> = ({ task, onToggle }) => {
       ref={drag as any}
       className={`task-button ${task.completed ? 'completed' : ''}`}
       style={gridStyle}
-      onTouchEnd={handleTouch}
-      onClick={() => onToggle(task.id)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {task.completed && (
         <span className="material-icons check-icon">check_circle</span>
