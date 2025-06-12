@@ -117,16 +117,10 @@ const TaskGridContent: React.FC<{
   onNewTask: () => void;
   showNewTaskForm: boolean;
 }> = ({ tasks, gridSize, onTaskToggle, onTaskMove, onTaskDelete, onNewTask, showNewTaskForm }) => {
-  const [isDragging, setIsDragging] = useState(false);
-
   // Monitor drag state
   const dragLayer = useDragLayer((monitor) => ({
     isDragging: monitor.isDragging(),
   }));
-
-  useEffect(() => {
-    setIsDragging(dragLayer.isDragging);
-  }, [dragLayer.isDragging]);
 
   return (
     <div className="task-grid-container">
@@ -166,7 +160,7 @@ const TaskGridContent: React.FC<{
         ))}
       </div>
       
-      <DeleteDropZone onDrop={onTaskDelete} isDragging={isDragging} />
+      <DeleteDropZone onDrop={onTaskDelete} isDragging={dragLayer.isDragging} />
       
       <button 
         className="new-task-button"
@@ -178,9 +172,9 @@ const TaskGridContent: React.FC<{
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: showNewTaskForm ? 0 : 1001,
-          opacity: showNewTaskForm ? 0 : 1,
+          opacity: showNewTaskForm || dragLayer.isDragging ? 0 : 1,
           transition: 'opacity 0.3s ease',
-          pointerEvents: showNewTaskForm ? 'none' : 'auto'
+          pointerEvents: showNewTaskForm || dragLayer.isDragging ? 'none' : 'auto'
         }}
       >
         +
