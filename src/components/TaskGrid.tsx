@@ -201,6 +201,14 @@ export const TaskGrid: React.FC = () => {
     return savedTime ? new Date(savedTime) : new Date();
   });
 
+  // タッチデバイスの検出
+  const isTouchDevice = () => {
+    return (('ontouchstart' in window) ||
+      (navigator.maxTouchPoints > 0));
+  };
+
+  const isMobile = isTouchDevice();
+
   // 画面サイズの変更を監視
   useEffect(() => {
     const handleResize = () => {
@@ -314,8 +322,6 @@ export const TaskGrid: React.FC = () => {
     setTasks([...tasks, task]);
     setShowNewTaskForm(false);
   };
-
-  const isMobile = window.innerWidth < 768;
 
   return (
     <DndProvider backend={isMobile ? TouchBackend : HTML5Backend} options={isMobile ? { enableMouseEvents: true } : undefined}>
