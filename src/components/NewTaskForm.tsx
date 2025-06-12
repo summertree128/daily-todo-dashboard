@@ -29,7 +29,7 @@ export const NewTaskForm: React.FC<NewTaskFormProps> = ({ onSubmit, onClose }) =
           width: selectedSize.width,
           height: selectedSize.height,
         },
-        position: { x: 0, y: 0 }, // この位置はTaskGridで上書きされます
+        position: { x: 0, y: 0 }, // This position will be overridden by TaskGrid
       });
     }
   };

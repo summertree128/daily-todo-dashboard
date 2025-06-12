@@ -9,7 +9,7 @@ import { NewTaskForm } from './NewTaskForm';
 const STORAGE_KEY = 'daily-todo-tasks';
 const LAST_RESET_KEY = 'last-reset-time';
 
-// 画面サイズに応じてグリッドサイズを調整
+// Adjust grid size based on screen size
 const getGridSize = () => {
   return { columns: 6, rows: 6 };
 };
@@ -119,7 +119,7 @@ const TaskGridContent: React.FC<{
 }> = ({ tasks, gridSize, onTaskToggle, onTaskMove, onTaskDelete, onNewTask, showNewTaskForm }) => {
   const [isDragging, setIsDragging] = useState(false);
 
-  // ドラッグ状態を監視
+  // Monitor drag state
   const dragLayer = useDragLayer((monitor) => ({
     isDragging: monitor.isDragging(),
   }));
@@ -201,7 +201,7 @@ export const TaskGrid: React.FC = () => {
     return savedTime ? new Date(savedTime) : new Date();
   });
 
-  // タッチデバイスの検出
+  // Detect touch device
   const isTouchDevice = () => {
     return (('ontouchstart' in window) ||
       (navigator.maxTouchPoints > 0));
@@ -209,7 +209,7 @@ export const TaskGrid: React.FC = () => {
 
   const isMobile = isTouchDevice();
 
-  // 画面サイズの変更を監視
+  // Monitor screen size changes
   useEffect(() => {
     const handleResize = () => {
       setGridSize(getGridSize());
@@ -219,25 +219,25 @@ export const TaskGrid: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // タスクが変更されるたびにlocalStorageに保存
+  // Save tasks to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
-  // タスクのリセットチェック
+  // Check for task reset
   useEffect(() => {
     const checkAndResetTasks = () => {
       const now = new Date();
       const lastReset = new Date(lastResetTime);
       
-      // 最後のリセットが前日以前で、現在時刻が午前2時以降の場合
+      // If last reset was before yesterday and current time is after 2 AM
       if (
         (now.getDate() > lastReset.getDate() || 
          now.getMonth() > lastReset.getMonth() || 
          now.getFullYear() > lastReset.getFullYear()) && 
         now.getHours() >= 2
       ) {
-        // タスクをリセット（completedをfalseに）
+        // Reset tasks (set completed to false)
         setTasks(prevTasks => 
           prevTasks.map(task => ({
             ...task,
@@ -249,10 +249,10 @@ export const TaskGrid: React.FC = () => {
       }
     };
 
-    // 初回チェック
+    // Initial check
     checkAndResetTasks();
 
-    // 1分ごとにチェック
+    // 1 minute check
     const intervalId = setInterval(checkAndResetTasks, 60000);
 
     return () => clearInterval(intervalId);
