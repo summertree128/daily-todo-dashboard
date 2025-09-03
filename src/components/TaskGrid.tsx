@@ -131,7 +131,7 @@ const TaskGridContent: React.FC<{
           gridTemplateColumns: `repeat(${gridSize.columns}, 1fr)`,
           gridTemplateRows: `repeat(${gridSize.rows}, 1fr)`,
           gap: '8px',
-          padding: '16px',
+          padding: '16px 16px 16px 80px', // Increased left padding for better balance
           height: 'calc(100vh - 100px)',
           width: '100%',
           boxSizing: 'border-box'
