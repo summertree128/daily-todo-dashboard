@@ -91,13 +91,15 @@ export const MenuButton: React.FC<{ onClick: () => void; isOpen: boolean }> = ({
         top: '20px',
         left: '20px',
         zIndex: 1002,
-        background: 'none',
-        border: 'none',
+        background: 'rgba(255, 255, 255, 0.9)',
+        border: '1px solid #ddd',
+        borderRadius: '4px',
         padding: '10px',
         cursor: 'pointer',
         opacity: isOpen ? 0 : 1,
         visibility: isOpen ? 'hidden' : 'visible',
         transition: 'opacity 0.3s ease, visibility 0.3s ease',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       }}
     >
       <svg
@@ -105,7 +107,7 @@ export const MenuButton: React.FC<{ onClick: () => void; isOpen: boolean }> = ({
         height="24"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
+        stroke="#333"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
