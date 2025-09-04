@@ -115,6 +115,9 @@ button:focus-visible {
   -ms-user-select: none;
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-appearance: none;
 }
 
 .task-button:hover {
